@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Topnav from './Templates/Topnav';
 import Dropdown from './Templates/Dropdown';
@@ -8,6 +8,7 @@ import Loading from './Loading';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Trending = () => {
+    document.title = "Stream-Verse | Trending";
   const navigate = useNavigate();
   const [category, setCategory] = useState('all');
   const [duration, setDuration] = useState('day');
@@ -29,7 +30,6 @@ const Trending = () => {
         setPage((prevPage) => prevPage + 1);
       }
 
-      console.log(data);
     } catch (error) {
       console.log('Error: ', error);
     }
@@ -59,7 +59,7 @@ const Trending = () => {
           <div className='w-[2%]'></div>
           <Dropdown
             title='Duration'
-            options={['week', 'day', 'month']}
+            options={['week', 'day']}
             func={(e) => setDuration(e.target.value)}
           />
         </div>
