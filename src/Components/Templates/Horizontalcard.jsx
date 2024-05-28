@@ -8,7 +8,7 @@ const Horizontalcard = ({data}) => {
         <div className="w-full flex  overflow-y-hidden mb-5 p-5">  
            
            {data.map((d,i) => (
-            <div className='min-w-[15%] bg-zinc-900 mr-5 mb-5 '>
+            <Link to={`/${d.media_type}/details/${d.id}`} className='min-w-[15%] bg-zinc-900 mr-5 mb-5 '>
                 <img 
                 className='w-full h-[45%]  object-cover'
                 src={`https://image.tmdb.org/t/p/original/${d.backdrop_path || d.poster_path}
@@ -34,7 +34,7 @@ const Horizontalcard = ({data}) => {
 
             
                 
-            </div>
+            </Link>
            ))}
 
 
