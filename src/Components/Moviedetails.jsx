@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncloadmovie, removemovie } from "../store/actions/movieActions";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import Loading from "./Loading";
 import Horizontalcard from "./Templates/Horizontalcard";
-
 
 const Moviedetails = () => {
   const { pathname } = useLocation();
@@ -19,7 +24,9 @@ const Moviedetails = () => {
     return () => {
       dispatch(removemovie());
     };
-  }, []);
+  }, [id]);
+
+  console.log(info)
   return info ? (
     <div
       style={{
@@ -30,7 +37,7 @@ const Moviedetails = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
-      className="w-screen h-screen px-[10%] relative overflow-hidden"
+      className="w-screen h-[120vh] px-[10%] relative overflow-hidden"
     >
       {/* part 1 navigation*/}
       <nav className=" h-[10vh] items-center w-full text-zinc-100 flex gap-10 text-2xl ">
@@ -39,19 +46,19 @@ const Moviedetails = () => {
           className="hover:text-[#6556cd] ri-arrow-left-line"
         ></Link>
         <a target="_blank" href={info.detail.homepage}>
-          <i class="ri-external-link-fill"></i>
+          <i className="ri-external-link-fill"></i>
         </a>
         <a
           target="_blank"
           href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
         >
-          <i class="ri-earth-fill"></i>
+          <i className="ri-earth-fill"></i>
         </a>
         <a
           target="_blank"
           href={`https://www.imdb.com/title/${info.externalid.imdb_id}/`}
         >
-          <i class="ri-global-line"></i>
+          <i className="ri-global-line"></i>
         </a>
       </nav>
 
@@ -90,12 +97,12 @@ const Moviedetails = () => {
 
             <h1 className="text-2xl w-[60px]  leading-6">User Score </h1>
             <h1 className="">
-              <i class=" mr-2 text-[#f5d63b] ri-calendar-schedule-fill"></i>
+              <i className=" mr-2 text-[#f5d63b] ri-calendar-schedule-fill"></i>
               {info.detail.release_date}
             </h1>
             <h1>{info.detail.genres.map((g) => g.name).join(",")}</h1>
             <h1>
-              <i class=" text-[#e7bf3a] mr-1 ri-time-fill"></i>
+              <i className=" text-[#e7bf3a] mr-1 ri-time-fill"></i>
               {info.detail.runtime}min
             </h1>
           </div>
@@ -111,22 +118,23 @@ const Moviedetails = () => {
           <p className="mb-3">{info.translations.join(",")}</p>
 
           <Link
-            className=" absolute left-[10.5%] top-[51%] mt-1 py-5  px-6 text-xl font-semibold bg-[#6556CD] rounded-lg"
+            className=" absolute left-[10.5%] top-[50vh] mt-1 py-5  px-6 text-xl font-semibold bg-[#6556CD] rounded-lg"
             to={`${pathname}/trailer`}
           >
-            <i class=" text-xl mr-2 ri-google-play-fill"></i> Watch Trailer
+            <i className=" text-xl mr-2 ri-google-play-fill"></i> Watch Trailer
           </Link>
         </div>
       </div>
 
       {/* part3  Available on platforms */}
 
-      <div className="w-[80%] flex flex-col gap-y-5 mt-5 left-[30%] absolute ">
+      <div className=" w-[80%] flex flex-col gap-y-5 mt-5 left-[30%] absolute ">
         {info.watchproviders && info.watchproviders.flatrate && (
           <div className="flex gap-x-10 items-center text-white">
             <h1 className="font-semibold italic">Available on Platforms</h1>
-            {info.watchproviders.flatrate.map((w) => (
+            {info.watchproviders.flatrate.map((w, i) => (
               <img
+                key={i}
                 title={w.provider_name}
                 className="w-[5vh] h-[5vh] object-cover rounded-md  "
                 src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
@@ -139,8 +147,9 @@ const Moviedetails = () => {
         {info.watchproviders && info.watchproviders.rent && (
           <div className="flex gap-x-10 items-center text-white">
             <h1 className="font-semibold italic">Available on rent</h1>
-            {info.watchproviders.rent.map((w) => (
+            {info.watchproviders.rent.map((w, i) => (
               <img
+                key={i}
                 title={w.provider_name}
                 className="w-[5vh] h-[5vh] object-cover rounded-md  "
                 src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
@@ -153,8 +162,9 @@ const Moviedetails = () => {
         {info.watchproviders && info.watchproviders.buy && (
           <div className="flex gap-x-10 items-center text-white">
             <h1 className="font-semibold italic">Available on Buy</h1>
-            {info.watchproviders.buy.map((w) => (
+            {info.watchproviders.buy.map((w, i) => (
               <img
+                key={i}
                 title={w.provider_name}
                 className="w-[5vh] h-[5vh] object-cover rounded-md  "
                 src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
@@ -167,11 +177,12 @@ const Moviedetails = () => {
 
       {/* part4  recommendations and similar stuff */}
 
-      <Horizontalcard
-        data = {
+      <Horizontalcard 
+        data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
       />
+      <Outlet />
     </div>
   ) : (
     <Loading />

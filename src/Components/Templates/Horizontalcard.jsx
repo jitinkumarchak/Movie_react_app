@@ -33,6 +33,10 @@ const Horizontalcard = ({ data }) => {
           </div>
         </Link>
       ))}
+      {data.length === 0? (
+  <h1 className="text-3xl text-white font-black text-center">
+    Nothing to show
+  </h1> ) : null}
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Cards = ({ data, title }) => {
       {data.map((c, i) => (
         <Link
           to={`/${c.media_type || title}/details/${c.id}`}
-          className=" relative w-[25vh] mr-[5%] mb-[5%]"
+          className=" hover:scale-110 duration-200 relative w-[25vh] mr-[5%] mb-[5%]"
           key={i}
         >
           <img
