@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncloadperson, removeperson } from "../store/actions/personActions";
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loading from "./Loading";
 import Horizontalcard from "./Templates/Horizontalcard";
 import Dropdown from "./Templates/Dropdown";
@@ -20,7 +14,6 @@ const PersonDetails = () => {
   const { info } = useSelector((state) => state.person);
   const dispatch = useDispatch();
   const [category, setcategory] = useState("movie");
-  console.log(info);
 
   useEffect(() => {
     dispatch(asyncloadperson(id));
@@ -135,20 +128,19 @@ const PersonDetails = () => {
 
           <div className=" list-disk text-zinc-400  w-full h-[50vh] overflow-x-hidden overflow-y-auto shadow-xl shadow-[rgba(255,255,255,0.3)] border-2 border-zinc-700 mt-5  p-5">
             {info[category + "Credits"].cast.map((c, i) => (
-              <li key={i} className="hover:text-white duration-300 cursor-pointer hover:bg-[#19191d] p-5 ">
+              <li
+                key={i}
+                className="hover:text-white duration-300 cursor-pointer hover:bg-[#19191d] p-5 "
+              >
                 <Link to={`/${category}/details/${c.id}`} className="">
                   <span>
                     {" "}
-                    {c.name ||
-                      c.title ||
-                      c.original_name ||
-                      c.original_title}
+                    {c.name || c.title || c.original_name || c.original_title}
                   </span>
 
-                  <span className="block ml-5">
-                    {c.character && ` Role Played : ${c.character}` }
-                    
-                     </span>
+                  <span className="block ml-5 mt-2">
+                    {c.character && ` Role Played : ${c.character}`}
+                  </span>
                 </Link>
               </li>
             ))}
