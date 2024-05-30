@@ -132,10 +132,27 @@ const PersonDetails = () => {
               func={(e) => setcategory(e.target.value)}
             />
           </div>
-          
 
-          <div className="w-full h-[50vh] overflow-x-hidden overflow-y-auto shadow-xl shadow-zinc-400 mt-5 "  ></div>
+          <div className=" list-disk text-zinc-400  w-full h-[50vh] overflow-x-hidden overflow-y-auto shadow-xl shadow-[rgba(255,255,255,0.3)] border-2 border-zinc-700 mt-5  p-5">
+            {info[category + "Credits"].cast.map((c, i) => (
+              <li key={i} className="hover:text-white duration-300 cursor-pointer hover:bg-[#19191d] p-5 ">
+                <Link to={`/${category}/details/${c.id}`} className="">
+                  <span>
+                    {" "}
+                    {c.name ||
+                      c.title ||
+                      c.original_name ||
+                      c.original_title}
+                  </span>
 
+                  <span className="block ml-5">
+                    {c.character && ` Role Played : ${c.character}` }
+                    
+                     </span>
+                </Link>
+              </li>
+            ))}
+          </div>
         </div>
       </div>
     </div>
