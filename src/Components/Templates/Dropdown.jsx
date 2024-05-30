@@ -1,6 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const Dropdown = ({ title, options,func }) => {
+const Dropdown = ({ title, options, func }) => {
+  if (!Array.isArray(options)) {
+    console.error("The options prop must be an array");
+    return null;
+  }
+
   return (
     <div className="select">
       <select defaultValue="0" onChange={func} name="format" id="format">

@@ -25,7 +25,7 @@ const TvDetails = () => {
       dispatch(removetv());
     };
   }, []);
-
+  console.log(info);
   return info ? (
     <div
       style={{
@@ -177,23 +177,20 @@ const TvDetails = () => {
       <hr className="mt-10 mb-5 border-none h-[2px] bg-zinc-500" />
       <h1 className="text-3xl font-semibold text-white">Recommendations</h1>
 
-      <div className="w-[100%] flex overflow-hidden mb-5 p-5 ">
-        {info.detail.seasons.map((s, i) => (
-          <>
+      <div className="w-[100%] flex overflow-y-auto  mb-5 p-5 ">
+        {info.detail.seasons.map((c, i) => (
+          <div className="w-[15vh] mr-[15%]">
             <img
-              key={i}
-              className=" shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] h-[40vh] object-cover "
-              src={`https://image.tmdb.org/t/p/original/
-          ${s.poster_path}`}
+              className=" shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] h-[40vh] min-w-[14vw] object-cover "
+              src={`https://image.tmdb.org/t/p/original/${
+                c.poster_path || c.backdrop_path || c.profile_path
+              }`}
               alt=""
             />
             <h1 className="text-2xl text-zinc-300 mt-3 font-semibold ">
-              {info.detail.name ||
-                s.title ||
-                s.original_name ||
-                s.original_title}
+              {c.name || c.title || c.original_name || c.original_title}
             </h1>
-          </>
+          </div>
         ))}
       </div>
 
