@@ -36,7 +36,7 @@ const TvDetails = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
-      className="w-screen h-[180vh] px-[10%] relative overflow-hidden"
+      className="w-screen h-[200vh] px-[10%] relative overflow-hidden"
     >
       {/* part 1 navigation*/}
       <nav className=" h-[10vh] items-center w-full text-zinc-100 flex gap-10 text-2xl ">
@@ -63,7 +63,7 @@ const TvDetails = () => {
 
       {/* part2 poster and details */}
 
-      <div className="w-full flex">
+      <div className="w-full flex mb-[30vh]">
         <img
           className=" shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] h-[40vh] object-cover "
           src={`https://image.tmdb.org/t/p/original/${
@@ -127,7 +127,7 @@ const TvDetails = () => {
 
       {/* part3  Available on platforms */}
 
-      <div className="w-[80%] flex flex-col gap-y-5 mt-5 left-[30%] absolute ">
+      <div className="w-[80%] flex flex-col gap-y-5 mt-5 left-[30%] top-[30%] absolute ">
         {info.watchproviders && info.watchproviders.flatrate && (
           <div className="flex gap-x-10 items-center text-white">
             <h1 className="font-semibold italic">Available on Platforms</h1>
@@ -175,7 +175,7 @@ const TvDetails = () => {
 
       {/* part4  seasons */}
       <hr className="mt-10 mb-5 border-none h-[2px] bg-zinc-500" />
-      <h1 className="text-3xl font-semibold text-white">Recommendations</h1>
+      <h1 className="text-3xl font-semibold text-white">Seasons</h1>
 
       <div className="w-[100%] flex overflow-y-auto  mb-5 p-5 ">
         {info.detail.seasons.map((c, i) => (

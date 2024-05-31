@@ -37,7 +37,7 @@ const Moviedetails = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
-      className="w-screen h-[120vh] px-[10%] relative overflow-hidden"
+      className="w-screen h-[140vh] px-[10%] relative overflow-hidden"
     >
       {/* part 1 navigation*/}
       <nav className=" h-[10vh] items-center w-full text-zinc-100 flex gap-10 text-2xl ">
@@ -64,7 +64,7 @@ const Moviedetails = () => {
 
       {/* part2 poster and details */}
 
-      <div className="w-full flex">
+      <div className="w-full flex mb-[25vh]">
         <img
           className=" shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] h-[40vh] object-cover "
           src={`https://image.tmdb.org/t/p/original/${
@@ -128,7 +128,7 @@ const Moviedetails = () => {
 
       {/* part3  Available on platforms */}
 
-      <div className=" w-[80%] flex flex-col gap-y-5 mt-5 left-[30%] absolute ">
+      <div className=" w-[80%] flex flex-col gap-y-5 mt-5 left-[30%] top-[47%] absolute ">
         {info.watchproviders && info.watchproviders.flatrate && (
           <div className="flex gap-x-10 items-center text-white">
             <h1 className="font-semibold italic">Available on Platforms</h1>
@@ -177,7 +177,7 @@ const Moviedetails = () => {
 
       {/* part4  recommendations and similar stuff */}
 
-      <Horizontalcard 
+      <Horizontalcard  className=" absolute py-[10vh]"
         data={
           info.recommendations.length > 0 ? info.recommendations : info.similar
         }
