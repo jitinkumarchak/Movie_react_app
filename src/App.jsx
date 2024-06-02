@@ -10,6 +10,7 @@ import PersonDetails from "./Components/PersonDetails";
 import TvDetails from "./Components/TvDetails";
 import Trailer from "./Components/Templates/Trailer";
 import Notfound from "./Components/Notfound";
+import About from "./Components/About";
 
 function App() {
   return (
@@ -28,7 +29,9 @@ function App() {
         </Route>
         <Route path="/person" element={<People />} />
         <Route path="/person/details/:id" element={<PersonDetails />} />
+        <Route path="/About" element={<About />} />
       </Routes>
+
     </div>
   );
 }
